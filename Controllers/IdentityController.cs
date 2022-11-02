@@ -11,4 +11,10 @@ public class IdentityController:ControllerBase
     {
         return Ok("Working");
     }
+
+    [HttpPost]
+    public IActionResult Post()
+    {
+        return Ok();
+    }
 }
