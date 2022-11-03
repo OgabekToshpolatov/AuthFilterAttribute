@@ -48,7 +48,7 @@ public class IdentityController:ControllerBase
     }
 
     [HttpGet("calculate")]
-    //[TypeFilter(typeof(AuthFilterAttribute))]
+    [TypeFilter(typeof(AuthFilterAttribute))]
     public IActionResult Calculator(int n, int k)
     {
         var a = Calculate.Calculate.Result(n,k);
