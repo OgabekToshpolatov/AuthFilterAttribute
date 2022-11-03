@@ -1,6 +1,9 @@
 namespace auten.Calculate;
 
-public class Calculate
+public static class Calculate
 {
-    
+    public static int Result(int N, int K)
+    {
+        return (N+K);
+    }
 }

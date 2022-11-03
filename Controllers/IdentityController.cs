@@ -1,4 +1,7 @@
 using auten.Data;
+using auten.Entities;
+using auten.Filters;
+using auten.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace auten.Controllers;
@@ -14,14 +17,46 @@ public class IdentityController:ControllerBase
         _context = context ;
     }
     [HttpGet]
-    public IActionResult Get()
+    public IActionResult Get() => Ok(_context.Users!.ToList());
+
+    [HttpGet("lich")]
+    public IActionResult GetUser()
     {
-        return Ok("Working");
+        if(!HttpContext.Request.Headers.ContainsKey("Key"))
+                return Unauthorized();
+
+         var key = HttpContext.Request.Headers["Key"].ToString();
+
+         var user = _context.Users!.Where( x=> x.Key == key).FirstOrDefault();       
+
+        if(user is null) return NotFound();
+
+        return Ok(user);
+    }
+    
+    [HttpPost]
+    public IActionResult PostUser(CreateUser usermodel)
+    {
+        var user = new User()
+        {
+            Name = usermodel.Name,
+            Key = Guid.NewGuid().ToString()
+        };
+        _context.Users!.Add(user);
+        _context.SaveChanges();
+        return Ok(user);
     }
 
-    [HttpPost]
-    public IActionResult PostUser()
+    [HttpGet("calculate")]
+    //[TypeFilter(typeof(AuthFilterAttribute))]
+    public IActionResult Calculator(int n, int k)
     {
-        return Ok();
+        var a = Calculate.Calculate.Result(n,k);
+        return Ok(a);
     }
+
+     
+
+    
+     
 }
