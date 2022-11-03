@@ -7,17 +7,11 @@ public static class Calculate
         int c=0;
             for(int i=1;i<=a;i++)
             {
-                var list = i.ToString();
-                var k = list.Count();
-                
+                var list = i.ToString(); var k = list.Count();
                 for(int j=0;j<k;j++)
                 {
-                    if(list[j].ToString()==b.ToString())
-                    {
-                        c++;
-                    }
+                    if(list[j].ToString()==b.ToString())  { c++; }
                 }
-            }
-            return c ;
+            } return c ;
     }
 }
