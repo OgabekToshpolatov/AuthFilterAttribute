@@ -1,3 +1,4 @@
+using auten.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace auten.Controllers;
@@ -6,6 +7,12 @@ namespace auten.Controllers;
 [Route("api/[controller]")]
 public class IdentityController:ControllerBase
 {
+    private readonly AppDbContext _context;
+
+    public IdentityController(AppDbContext context)
+    {
+        _context = context ;
+    }
     [HttpGet]
     public IActionResult Get()
     {
@@ -13,7 +20,7 @@ public class IdentityController:ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post()
+    public IActionResult PostUser()
     {
         return Ok();
     }
